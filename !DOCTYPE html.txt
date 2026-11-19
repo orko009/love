@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>I Love You ❤️</title>
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;min-height:100vh;display:grid;
+place-items:center;background:#d9eaff;
+font-family:Arial;overflow:hidden
+}
+.box{
+width:min(92vw,500px);aspect-ratio:1.08;
+background:black;border-radius:22px;
+position:relative;overflow:hidden
+}
+.heart{position:absolute;inset:0}
+.word{
+position:absolute;white-space:nowrap;
+font-size:12px;font-weight:bold;color:#ff9cbd;
+text-shadow:0 0 4px pink,0 0 9px #ff4f91;
+animation:glow 1.5s ease-in-out infinite alternate
+}
+@keyframes glow{
+from{opacity:.55;filter:brightness(.8)}
+to{opacity:1;filter:brightness(1.5)}
+}
+</style>
+</head>
+<body>
+<div class="box"><div class="heart" id="heart"></div></div>
+<script>
+const heart=document.getElementById("heart");
+for(let s=0;s<5;s++){
+for(let i=0;i<65;i++){
+let t=i/65*Math.PI*2;
+let x=16*Math.sin(t)**3;
+let y=13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t);
+let el=document.createElement("span");
+el.className="word";
+el.textContent="I love you";
+el.style.left=(50+x*(.76+s*.065)/34*100)+"%";
+el.style.top=(50-(y+6)*(.76+s*.065)/22*100)+"%";
+el.style.transform=`translate(-50%,-50%) rotate(${Math.atan2(13*Math.sin(t)-10*Math.sin(2*t)-6*Math.sin(3*t)-4*Math.sin(4*t),48*Math.sin(t)**2*Math.cos(t))*180/Math.PI}deg)`;
+el.style.animationDelay=`-${i*.04+s*.15}s`;
+heart.appendChild(el);
+}}
+</script>
+</body>
+</html>
